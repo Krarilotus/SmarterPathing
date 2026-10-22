@@ -1,0 +1,69 @@
+options:
+- display: GroupBox
+  category: [Smarter Pathing]
+  header: '{{group}}'
+  text: '{{group_descr}}'
+  hasHeader: true
+  children:
+  - url: smarter-pathing.assassinsResume
+    name: smarter-pathing-assassins-resume
+    text: '{{assassins_resume}}'
+    tooltip: '{{assassins_resume_tooltip}}'
+    display: Switch
+    contents:
+      type: boolean
+      value: true
+  - url: smarter-pathing.assassinsShortcut
+    name: smarter-pathing-assassins-shortcut
+    text: '{{assassins_shortcut}}'
+    tooltip: '{{assassins_shortcut_tooltip}}'
+    display: Switch
+    contents:
+      type: boolean
+      value: true
+  - url: smarter-pathing.shortcutGroundSteps
+    name: smarter-pathing-shortcut-ground-steps
+    text: '{{shortcut_ground_steps}}'
+    tooltip: '{{shortcut_ground_steps_tooltip}}'
+    display: Number
+    contents:
+      type: integer
+      value: 30
+      min: 1
+      max: 800
+      step: 1
+  - url: smarter-pathing.shortcutSavingPercent
+    name: smarter-pathing-shortcut-saving-percent
+    text: '{{shortcut_saving_percent}}'
+    tooltip: '{{shortcut_saving_percent_tooltip}}'
+    display: Number
+    contents:
+      type: integer
+      value: 25
+      min: 0
+      max: 90
+      step: 5
+  - url: smarter-pathing.workersUnstuck
+    name: smarter-pathing-workers-unstuck
+    text: '{{workers_unstuck}}'
+    tooltip: '{{workers_unstuck_tooltip}}'
+    display: Switch
+    contents:
+      type: boolean
+      value: true
+  - url: smarter-pathing.workersJobsUnstuck
+    name: smarter-pathing-workers-jobs-unstuck
+    text: '{{workers_jobs_unstuck}}'
+    tooltip: '{{workers_jobs_unstuck_tooltip}}'
+    display: Switch
+    contents:
+      type: boolean
+      value: true
+  - url: smarter-pathing.ignoreQuarryPiles
+    name: smarter-pathing-ignore-quarry-piles
+    text: '{{ignore_quarry_piles}}'
+    tooltip: '{{ignore_quarry_piles_tooltip}}'
+    display: Switch
+    contents:
+      type: boolean
+      value: true

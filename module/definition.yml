@@ -1,0 +1,9 @@
+name: smarter-pathing
+display-name: Smarter Pathing
+type: module
+version: 1.0.3
+author: Monsterfish
+dependencies:
+  map-extensions: ^1.0.0
+meta:
+  version: 1.0.3
