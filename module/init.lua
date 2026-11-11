@@ -40,6 +40,14 @@
      its work: it fades out (state 0x6E) and the building takes on a new worker, who sets
      out from the campfire with fresh routes.
 
+  6. Failed routes don't rebuild the whole map every time (rebuildLimit). When
+     traceAndCommitPathPlan cannot walk a found route back (a spot whose path links only go one
+     way), the game rebuilds every path link on the map, the area map and every building's
+     links. A unit retries every 40 ticks and the rebuild lays the same links again, so a few
+     stuck units made this most of the game's work (a profile: 79 rebuilds a second, 60% of
+     the time). The rebuild now runs at most once every rebuildEveryTicks ticks; in between the
+     route simply fails.
+
   Every address is found by pattern scan or read out of the instruction that uses it, so the
   module runs on Stronghold Crusader.exe and Stronghold_Crusader_Extreme.exe alike.
 ]]
@@ -56,6 +64,8 @@ local DEFAULTS = {
   workersJobsUnstuck = true,
   shortcutGroundSteps = 30,
   shortcutSavingPercent = 25,
+  rebuildLimit = true,
+  rebuildEveryTicks = 200,
 }
 
 ---------------------------------------------------------------------------------------
@@ -129,6 +139,17 @@ local WORKER_FIELDS = {
   U_RETRY = 0x3F4,                      -- ticks until a failed route is tried again
 }
 local U_IDLE = WORKER_FIELDS.U_IDLE
+
+-- traceAndCommitPathPlan's failure branch: mov edi, [esp+0x10] / add dword [edi+0x78], 1 /
+-- mov ecx, edi / mov dword [edi+0x1BB3C], 0 / call updatePathLinkageLayerForEachBuilding...
+-- The scan starts at its mov ecx, edi (Improved Tunnelers puts a jump on the 8 bytes before).
+-- The rebuild's first call is at +0x0C; the branch pops and returns (ret 0x14) at +0x31.
+local AOB_TRACE_FAILED = "8B CF C7 87 3C BB 01 00 00 00 00 00 E8 ? ? ? ? 6A 01 8B CF E8"
+local TRACE_FAILED_CALL = 0x0C
+local TRACE_FAILED_DONE = { 0x31, { 0x5D, 0x5B, 0x5E, 0x5F, 0x83, 0xC4, 0x0C, 0xC2, 0x14, 0x00 } }
+-- The game's tick counter: mov edx, [ticks] in updateUnits.
+local AOB_TICKS = "8B 87 50 0A 00 00 8B 8F 98 09 00 00 8B 15"
+local TICKS_OPERAND = 0x0E
 
 local ASSASSIN = 73
 local MAX_UNITS = 0x10000
@@ -310,6 +331,22 @@ local function enable(self, config)
       SAVED_PLAN = core.allocate(PLAN_BYTES, true),
     })
     core.writeCode(call, { 0xE8, core.itob(core.getRelativeAddress(call, choice, -5)) })
+  end
+
+  if setting(config, "rebuildLimit") then
+    local site = scan(AOB_TRACE_FAILED, "traceAndCommitPathPlan's failure branch")
+    expectBytes(site + TRACE_FAILED_DONE[1], TRACE_FAILED_DONE[2], "traceAndCommitPathPlan's failure branch")
+    local call = site + TRACE_FAILED_CALL
+    local data = core.allocate(8, true)
+    local limit = assemble(templates.rebuildLimit, {
+      TICKS = core.readInteger(scan(AOB_TICKS, "the game tick counter") + TICKS_OPERAND),
+      LAST = data,
+      SKIPPED = data + 4,
+      LIMIT = number(config, "rebuildEveryTicks", 1, 100000),
+      REBUILD = (call + 5 + core.readInteger(call + 1)) & 0xFFFFFFFF,
+      DONE = site + TRACE_FAILED_DONE[1],
+    })
+    core.writeCode(call, { 0xE8, core.itob(core.getRelativeAddress(call, limit, -5)) })
   end
 
   if setting(config, "assassinsResume") then

@@ -124,6 +124,29 @@ finish:
 -- for ever, so it never arrives and never goes back to work.
 -- Such a worker is stopped where it stands, as if it had arrived. If its break time is not
 -- used up, it picks another building to go to; otherwise the game ends the break.
+-- traceAndCommitPathPlan, its failure branch: the walk-back from the target found no step
+-- (mov edi, [esp+0x10] / add dword [edi+0x78], 1). The game then rebuilds every path link on
+-- the map, the area map and every building's links, and returns no route. A spot whose links
+-- only go one way makes the same routes fail on every retry, and the rebuild lays the same
+-- links again - so it is let through at most once every LIMIT ticks; in between the route
+-- just fails (no plan, as the game leaves it), which costs nothing.
+-- It takes the place of the branch's first call (ecx = PathFindingState): let through, it goes
+-- on into the game's function; held back, it drops its return address and leaves the branch.
+-- The branch's opening bytes stay as they are (Improved Tunnelers hooks those).
+templates.rebuildLimit = [[
+  mov eax, [TICKS]
+  mov edx, eax
+  sub edx, [LAST]
+  cmp edx, LIMIT
+  jb skip
+  mov [LAST], eax
+  jmp REBUILD
+skip:
+  add dword [SKIPPED], 1
+  add esp, 4
+  jmp DONE
+]]
+
 templates.restUnstuck = [[
   mov eax, [esp + 4]
   imul eax, eax, 0x490

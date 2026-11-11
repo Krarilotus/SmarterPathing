@@ -67,3 +67,22 @@ options:
     contents:
       type: boolean
       value: true
+  - url: smarter-pathing.rebuildLimit
+    name: smarter-pathing-rebuild-limit
+    text: '{{rebuild_limit}}'
+    tooltip: '{{rebuild_limit_tooltip}}'
+    display: Switch
+    contents:
+      type: boolean
+      value: true
+  - url: smarter-pathing.rebuildEveryTicks
+    name: smarter-pathing-rebuild-every-ticks
+    text: '{{rebuild_every_ticks}}'
+    tooltip: '{{rebuild_every_ticks_tooltip}}'
+    display: Number
+    contents:
+      type: integer
+      value: 200
+      min: 10
+      max: 5000
+      step: 10

@@ -59,3 +59,13 @@ new worker from the campfire. Anything they were carrying is lost, as in the gam
 Troops on aggressive stance used to wander off to attack an enemy's quarry stockpile (the
 stone pile next to a quarry). The game already made them ignore the main stockpile, but
 it forgot the quarry's. Now they ignore both. You can still order them to attack it.
+
+## Failed routes don't slow the game down
+
+When a unit's route can't be laid out - usually a spot where the ways only lead one
+direction - the game rebuilds every path on the whole map before giving up. The unit tries
+again a moment later, the rebuild changes nothing, and so on. A handful of stuck units could
+make the game crawl: in one game this was more than half of everything the game did.
+
+Now that rebuild happens at most every 200 game ticks (a few seconds; a setting). In between,
+the stuck unit's route simply fails, which costs nothing.

@@ -35,3 +35,12 @@ ignore_quarry_piles_tooltip: |
   Troops on aggressive stance no longer go off on their own to attack an enemy's quarry
   stockpile (the stone pile next to a quarry), just like they already ignore the main
   stockpile. You can still order them to attack it.
+rebuild_limit: Failed routes don't rebuild the whole map
+rebuild_limit_tooltip: |
+  When a unit's route can't be laid out (a spot where the ways only lead one direction), the
+  game rebuilds every path on the whole map before giving up - and the unit tries again a few
+  moments later, so a handful of stuck units can make the game crawl. Now that rebuild happens
+  at most every so often; in between the route just fails, which costs nothing.
+rebuild_every_ticks: Rebuild the map's paths at most every (game ticks)
+rebuild_every_ticks_tooltip: |
+  200 ticks are a few seconds at normal speed.
