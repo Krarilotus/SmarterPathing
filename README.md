@@ -4,7 +4,6 @@
 
 Helps workers recover from blocked routes and assassins resume their orders after a fight. You can also limit costly path rebuilds and configure how much time a climb must save before assassins leave the ground route.
 
-- Package version: **1.0.5**
 - Module directory: `module/`
 - Targets: Stronghold Crusader 1.41 and Stronghold Crusader Extreme 1.41
 - Requires UCP framework 3.0.7 and frontend 1.0.2 or a compatible later version
