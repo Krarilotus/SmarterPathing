@@ -4,7 +4,7 @@ options:
   display: UCP2Switch
   contents:
     type: boolean
-    value: true
+    value: false
   header: '{{assassins_resume}}'
   text: '{{assassins_resume_tooltip}}'
   category:
@@ -14,7 +14,7 @@ options:
   display: UCP2Switch
   contents:
     type: boolean
-    value: true
+    value: false
   header: '{{workers_unstuck}}'
   text: '{{workers_unstuck_tooltip}}'
   category:
@@ -24,7 +24,7 @@ options:
   display: UCP2Switch
   contents:
     type: boolean
-    value: true
+    value: false
   header: '{{workers_jobs_unstuck}}'
   text: '{{workers_jobs_unstuck_tooltip}}'
   category:
@@ -34,7 +34,7 @@ options:
   display: UCP2Switch
   contents:
     type: boolean
-    value: true
+    value: false
   header: '{{rebuild_limit}}'
   text: '{{rebuild_limit_tooltip}}'
   category:
@@ -62,7 +62,7 @@ options:
   display: UCP2Switch
   contents:
     type: boolean
-    value: true
+    value: false
   header: '{{ignore_quarry_piles}}'
   text: '{{ignore_quarry_piles_tooltip}}'
   category:
@@ -72,7 +72,7 @@ options:
   display: UCP2Switch
   contents:
     type: boolean
-    value: true
+    value: false
   header: '{{assassins_shortcut}}'
   text: '{{assassins_shortcut_tooltip}}'
   category:

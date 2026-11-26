@@ -68,3 +68,10 @@ What the module does, in plain English, is in `module/locale/description-en.md`.
 * Quarry stockpiles: `aggressiveStanceTargetBuildingAtRange` passes over enemy building types
   whose byte in a type table is 0. The stockpile (10) is 0, the quarry stockpile (21) was 1;
   it is set to 0.
+
+## Vanilla and Recommended
+
+Every option of the module is off by default, so the module alone plays like the original
+game. Two plugins in this repository form the Smarter Pathing family in the launcher:
+`smarter-pathing-recommended` (offered first) switches on the recommended settings, `smarter-pathing-vanilla`
+keeps everything off. Plugins that build on the module set the options they need themselves.

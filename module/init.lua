@@ -59,14 +59,14 @@ local templates = require("templates")
 local MODULE_NAME = "smarter-pathing"
 
 local DEFAULTS = {
-  assassinsResume = true,
-  assassinsShortcut = true,
-  ignoreQuarryPiles = true,
-  workersUnstuck = true,
-  workersJobsUnstuck = true,
+  assassinsResume = false,
+  assassinsShortcut = false,
+  ignoreQuarryPiles = false,
+  workersUnstuck = false,
+  workersJobsUnstuck = false,
   shortcutGroundSteps = 30,
   shortcutSavingPercent = 25,
-  rebuildLimit = true,
+  rebuildLimit = false,
   rebuildEveryTicks = 200,
 }
 
