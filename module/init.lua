@@ -272,7 +272,6 @@ local function climbFlag()
 end
 
 local function enable(self, config)
-  -- Registered first: if route-search cannot take the route search, nothing is changed.
   local routes, route
   if setting(config, "assassinsShortcut") then
     routes = modules["route-search"]
