@@ -150,9 +150,9 @@ local U_IDLE = WORKER_FIELDS.U_IDLE
 local AOB_TRACE_FAILED = "8B CF C7 87 3C BB 01 00 00 00 00 00 E8 ? ? ? ? 6A 01 8B CF E8"
 local TRACE_FAILED_CALL = 0x0C
 local TRACE_FAILED_DONE = { 0x31, { 0x5D, 0x5B, 0x5E, 0x5F, 0x83, 0xC4, 0x0C, 0xC2, 0x14, 0x00 } }
--- The game's tick counter: mov edx, [ticks] in updateUnits.
-local AOB_TICKS = "8B 87 50 0A 00 00 8B 8F 98 09 00 00 8B 15"
-local TICKS_OPERAND = 0x0E
+-- The game tick counter: mov ecx, [edi+0x998] / mov edx, [ticks] in updateUnits. The mask load
+-- before it is patched by other modules.
+local AOB_TICKS = "8B 8F 98 09 00 00 8B 15 I(? ? ? ?)"
 
 local ASSASSIN = 73
 local MAX_UNITS = 0x10000
@@ -171,6 +171,12 @@ local function scan(pattern, purpose)
     error(MODULE_NAME .. ": could not find " .. purpose)
   end
   return address
+end
+
+local function tickCounter(feature)
+  local ok, _, ticks = pcall(utils.AOBExtract, AOB_TICKS)
+  if ok and ticks then return ticks end
+  log(WARNING, string.format("%s: game tick counter not found, %s stays off", MODULE_NAME, feature))
 end
 
 local function expectBytes(address, bytes, purpose)
@@ -350,13 +356,14 @@ local function enable(self, config)
     routes:enablePolicy(ROUTE_POLICY.id, choice)
   end
 
-  if setting(config, "rebuildLimit") then
+  local ticks = setting(config, "rebuildLimit") and tickCounter("rebuildLimit")
+  if ticks then
     local site = scan(AOB_TRACE_FAILED, "traceAndCommitPathPlan's failure branch")
     expectBytes(site + TRACE_FAILED_DONE[1], TRACE_FAILED_DONE[2], "traceAndCommitPathPlan's failure branch")
     local call = site + TRACE_FAILED_CALL
     limiter = core.allocate(12, true)
     local limit = assemble(templates.rebuildLimit, {
-      TICKS = core.readInteger(scan(AOB_TICKS, "the game tick counter") + TICKS_OPERAND),
+      TICKS = ticks,
       LAST = limiter,
       SKIPPED = limiter + 4,
       HAS_REBUILT = limiter + 8,
