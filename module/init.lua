@@ -176,6 +176,7 @@ end
 local function tickCounter(feature)
   local site, problem = core.AOBScanUnique(AOB_TICKS)
   if site then return core.readInteger(site + 8) end
+  log(ERROR, "The path rebuild limit is off. The game tick counter could not be read.")
   log(WARNING, string.format("%s: game tick counter %s, %s stays off", MODULE_NAME, problem, feature))
 end
 
