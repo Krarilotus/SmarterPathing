@@ -166,18 +166,9 @@ local SAVE_CLIMBERS = "assassin-climbers-v1.bin"
 ---------------------------------------------------------------------------------------
 
 local function scan(pattern, purpose)
-  local ok, address = pcall(core.AOBScan, pattern)
-  if not ok or not address or address == 0 then
-    error(MODULE_NAME .. ": could not find " .. purpose)
-  end
+  local address, reason = core.AOBScanUnique(pattern)
+  if not address then error(purpose .. " " .. reason, 0) end
   return address
-end
-
-local function tickCounter(feature)
-  local site, problem = core.AOBScanUnique(AOB_TICKS)
-  if site then return core.readInteger(site + 8) end
-  log(ERROR, "The path rebuild limit is off. The game tick counter could not be read.")
-  log(WARNING, string.format("%s: game tick counter %s, %s stays off", MODULE_NAME, problem, feature))
 end
 
 local function expectBytes(address, bytes, purpose)
@@ -215,17 +206,24 @@ end
 
 local function setting(config, name)
   if type(config) == "table" and config[name] ~= nil then
-    return config[name] == true
+    if type(config[name]) == "boolean" then return config[name] end
+    log(ERROR, "Smarter Pathing: " .. name .. " must be on or off. Using the default.")
   end
   return DEFAULTS[name]
 end
 
 local function number(config, name, low, high)
-  local value = type(config) == "table" and tonumber(config[name]) or nil
-  if value == nil then
-    value = DEFAULTS[name]
+  if type(config) ~= "table" then return DEFAULTS[name] end
+  local value = config[name]
+  if value == nil then return DEFAULTS[name] end
+  if type(value) ~= "number" then
+    log(ERROR, name .. " must be a number. Using the default.")
+  elseif value >= low and value <= high and value % 1 == 0 then
+    return value
+  else
+    log(WARNING, name .. " is outside the allowed values. Using the default.")
   end
-  return math.max(low, math.min(high, math.floor(value)))
+  return DEFAULTS[name]
 end
 
 ---------------------------------------------------------------------------------------
@@ -279,115 +277,137 @@ local function climbFlag()
 end
 
 local function enable(self, config)
-  local ticks = setting(config, "rebuildLimit") and tickCounter("rebuildLimit")
-  local routes, route
-  if setting(config, "assassinsShortcut") then
-    routes = modules["route-search"]
-    if not routes or (routes.version or 0) < 1 then
-      error(MODULE_NAME .. ": the assassin shortcut needs the route-search module (version 1)")
-    end
-    route = routes:addPolicy(ROUTE_POLICY)
+  local function install(feature, fn)
+    local ok, message = pcall(fn)
+    if not ok then log(ERROR, feature .. " is off. " .. tostring(message)) end
   end
 
   local climbers, failures, limiter
+  local shorten = setting(config, "assassinsShortcut")
+  local resume = setting(config, "assassinsResume")
+  local climbOK, climbSite, flag
+  if shorten or resume then
+    climbOK, climbSite, flag = pcall(climbFlag)
+  end
   if setting(config, "workersUnstuck") then
-    local site = scan(AOB_RESTING, "the workers' break (SetRestingForUnit)")
-    local values = {
-      UNITS = core.readInteger(site + RESTING_IDLE_OPERAND) - U_IDLE,
-      RESUME = site + RESTING_SIZE,
-    }
-    for name, offset in pairs(WORKER_FIELDS) do
-      values[name] = offset
-    end
-    jumpTo(site, assemble(templates.restUnstuck, values), RESTING_SIZE)
+    install("Workers getting unstuck on breaks", function()
+      local site = scan(AOB_RESTING, "the workers' break (SetRestingForUnit)")
+      local values = {
+        UNITS = core.readInteger(site + RESTING_IDLE_OPERAND) - U_IDLE,
+        RESUME = site + RESTING_SIZE,
+      }
+      for name, offset in pairs(WORKER_FIELDS) do
+        values[name] = offset
+      end
+      jumpTo(site, assemble(templates.restUnstuck, values), RESTING_SIZE)
+    end)
   end
 
   if setting(config, "workersJobsUnstuck") then
-    local site = scan(AOB_ROUTE_FAILED, "processUnitMove's failed route search")
-    local data = core.allocate(TYPE_COUNT + MAX_UNITS * 5, true)
-    local jobWorkers = data
-    failures = data + TYPE_COUNT
-    for _, unitType in ipairs(JOB_WORKER_TYPES) do
-      core.writeByte(jobWorkers + unitType, 1)
-    end
-    jumpTo(site, assemble(templates.jobGiveUp, {
-      UNITS_FROM_STATE = UNITS_FROM_STATE,
-      U_TYPE = U_TYPE,
-      U_STATE = U_STATE,
-      U_TICKS = U_TICKS,
-      U_DEST_TILE = WORKER_FIELDS.U_DEST_TILE,
-      TYPE_COUNT = TYPE_COUNT,
-      JOB_WORKERS = jobWorkers,
-      STATE_BREAK = STATE_BREAK,
-      STATE_FADE = STATE_FADE,
-      MAX_UNITS = MAX_UNITS,
-      FAIL_TILES = data + TYPE_COUNT,
-      FAIL_COUNTS = data + TYPE_COUNT + MAX_UNITS * 4,
-      GIVE_UP = GIVE_UP,
-      RESUME = site + ROUTE_FAILED_SIZE,
-    }), ROUTE_FAILED_SIZE)
+    install("Workers getting unstuck on jobs", function()
+      local site = scan(AOB_ROUTE_FAILED, "processUnitMove's failed route search")
+      local data = core.allocate(TYPE_COUNT + MAX_UNITS * 5, true)
+      local jobWorkers = data
+      for _, unitType in ipairs(JOB_WORKER_TYPES) do
+        core.writeByte(jobWorkers + unitType, 1)
+      end
+      jumpTo(site, assemble(templates.jobGiveUp, {
+        UNITS_FROM_STATE = UNITS_FROM_STATE,
+        U_TYPE = U_TYPE,
+        U_STATE = U_STATE,
+        U_TICKS = U_TICKS,
+        U_DEST_TILE = WORKER_FIELDS.U_DEST_TILE,
+        TYPE_COUNT = TYPE_COUNT,
+        JOB_WORKERS = jobWorkers,
+        STATE_BREAK = STATE_BREAK,
+        STATE_FADE = STATE_FADE,
+        MAX_UNITS = MAX_UNITS,
+        FAIL_TILES = data + TYPE_COUNT,
+        FAIL_COUNTS = data + TYPE_COUNT + MAX_UNITS * 4,
+        GIVE_UP = GIVE_UP,
+        RESUME = site + ROUTE_FAILED_SIZE,
+      }), ROUTE_FAILED_SIZE)
+      failures = data + TYPE_COUNT
+    end)
   end
 
   if setting(config, "ignoreQuarryPiles") then
-    local site = scan(AOB_AGGRESSIVE_SKIP, "the aggressive stance's building list")
-    local skip = core.readInteger(site + AGGRESSIVE_SKIP_TABLE)
-    local entry = skip + QUARRY_STOCKPILE - AGGRESSIVE_SKIP_FIRST
-    if core.readByte(skip) & 0xFF ~= 0 or core.readByte(entry) & 0xFF > 1 then
-      error(MODULE_NAME .. ": the aggressive stance's building list is not the one this module knows")
-    end
-    core.writeCode(entry, { 0 })
+    install("Ignoring quarry stockpiles", function()
+      local site = scan(AOB_AGGRESSIVE_SKIP, "the aggressive stance's building list")
+      local skip = core.readInteger(site + AGGRESSIVE_SKIP_TABLE)
+      local entry = skip + QUARRY_STOCKPILE - AGGRESSIVE_SKIP_FIRST
+      if core.readByte(skip) & 0xFF ~= 0 or core.readByte(entry) & 0xFF > 1 then
+        error(MODULE_NAME .. ": the aggressive stance's building list is not the one this module knows")
+      end
+      core.writeCode(entry, { 0 })
+    end)
   end
 
-  if route then
-    local _, flag = climbFlag()
-    scan(AOB_BIND_PLAN, "where a route is written")
-    local choice = assemble(templates.climbChoice, {
-      CLIMB_FLAG = flag,
-      NEXT = route.next,
-      UNIT = route.unit,
-      UNIT_DEST = UNITS_FROM_STATE + U_DEST_X,
-      UNIT_2D2 = UNITS_FROM_STATE + WORKER_FIELDS.U_MOVE_2D2,
-      SAVED_ORDER = core.allocate(8, true),
-      GROUND_ENOUGH = number(config, "shortcutGroundSteps", 1, 800),
-      KEEP_PERCENT = 100 - number(config, "shortcutSavingPercent", 0, 90),
-      PLAN = PF_PLAN,
-      PLAN_LENGTH = PF_PLAN_LENGTH,
-      PLAN_BYTES = PLAN_BYTES,
-      SAVED_PLAN = core.allocate(PLAN_BYTES, true),
-    })
-    routes:enablePolicy(ROUTE_POLICY.id, choice)
+  if shorten then
+    install("Assassin shortcuts", function()
+      local routes = modules["route-search"]
+      if not routes or (routes.version or 0) < 1 then
+        error("Route Search version 1 is required.", 0)
+      end
+      if not climbOK then error(climbSite, 0) end
+      scan(AOB_BIND_PLAN, "where a route is written")
+      local route = routes:addPolicy(ROUTE_POLICY)
+      local choice = assemble(templates.climbChoice, {
+        CLIMB_FLAG = flag,
+        NEXT = route.next,
+        UNIT = route.unit,
+        UNIT_DEST = UNITS_FROM_STATE + U_DEST_X,
+        UNIT_2D2 = UNITS_FROM_STATE + WORKER_FIELDS.U_MOVE_2D2,
+        SAVED_ORDER = core.allocate(8, true),
+        GROUND_ENOUGH = number(config, "shortcutGroundSteps", 1, 800),
+        KEEP_PERCENT = 100 - number(config, "shortcutSavingPercent", 0, 90),
+        PLAN = PF_PLAN,
+        PLAN_LENGTH = PF_PLAN_LENGTH,
+        PLAN_BYTES = PLAN_BYTES,
+        SAVED_PLAN = core.allocate(PLAN_BYTES, true),
+      })
+      routes:enablePolicy(ROUTE_POLICY.id, choice)
+    end)
   end
 
-  if ticks then
-    local site = scan(AOB_TRACE_FAILED, "traceAndCommitPathPlan's failure branch")
-    expectBytes(site + TRACE_FAILED_DONE[1], TRACE_FAILED_DONE[2], "traceAndCommitPathPlan's failure branch")
-    local call = site + TRACE_FAILED_CALL
-    limiter = core.allocate(12, true)
-    local limit = assemble(templates.rebuildLimit, {
-      TICKS = ticks,
-      LAST = limiter,
-      SKIPPED = limiter + 4,
-      HAS_REBUILT = limiter + 8,
-      LIMIT = number(config, "rebuildEveryTicks", 1, 100000),
-      REBUILD = (call + 5 + core.readInteger(call + 1)) & 0xFFFFFFFF,
-      DONE = site + TRACE_FAILED_DONE[1],
-    })
-    core.writeCode(call, { 0xE8, core.itob(core.getRelativeAddress(call, limit, -5)) })
+  if setting(config, "rebuildLimit") then
+    install("The path rebuild limit", function()
+      local ticks = core.readInteger(scan(AOB_TICKS, "the game tick counter") + 8)
+      local site = scan(AOB_TRACE_FAILED, "traceAndCommitPathPlan's failure branch")
+      expectBytes(site + TRACE_FAILED_DONE[1], TRACE_FAILED_DONE[2], "traceAndCommitPathPlan's failure branch")
+      local call = site + TRACE_FAILED_CALL
+      local state = core.allocate(12, true)
+      local limit = assemble(templates.rebuildLimit, {
+        TICKS = ticks,
+        LAST = state,
+        SKIPPED = state + 4,
+        HAS_REBUILT = state + 8,
+        LIMIT = number(config, "rebuildEveryTicks", 1, 100000),
+        REBUILD = (call + 5 + core.readInteger(call + 1)) & 0xFFFFFFFF,
+        DONE = site + TRACE_FAILED_DONE[1],
+      })
+      core.writeCode(call, { 0xE8, core.itob(core.getRelativeAddress(call, limit, -5)) })
+      limiter = state
+    end)
   end
 
-  if setting(config, "assassinsResume") then
-    local site, flag = climbFlag()
-    climbers = core.allocate(MAX_UNITS, true)
-    jumpTo(site, assemble(templates.remember, {
-      UNIT_TYPE = UNITS_FROM_STATE + U_TYPE,
-      DEST_X = UNITS_FROM_STATE + U_DEST_X,
-      DEST_Y = UNITS_FROM_STATE + U_DEST_Y,
-      ASSASSIN = ASSASSIN,
-      MAX_UNITS = MAX_UNITS,
-      CLIMB_FLAG = flag,
-      CLIMBERS = climbers,
-      RESUME = site + FINAL_DESTINATION_SIZE,
-    }), FINAL_DESTINATION_SIZE)
+  if resume then
+    install("Resuming assassin climb orders", function()
+      if not climbOK then error(climbSite, 0) end
+      local site = climbSite
+      local state = core.allocate(MAX_UNITS, true)
+      jumpTo(site, assemble(templates.remember, {
+        UNIT_TYPE = UNITS_FROM_STATE + U_TYPE,
+        DEST_X = UNITS_FROM_STATE + U_DEST_X,
+        DEST_Y = UNITS_FROM_STATE + U_DEST_Y,
+        ASSASSIN = ASSASSIN,
+        MAX_UNITS = MAX_UNITS,
+        CLIMB_FLAG = flag,
+        CLIMBERS = state,
+        RESUME = site + FINAL_DESTINATION_SIZE,
+      }), FINAL_DESTINATION_SIZE)
+      climbers = state
+    end)
   end
   if climbers or failures or limiter then
     registerWorldState(climbers, failures, limiter)
