@@ -17,6 +17,10 @@ stopping where it ended.
 
 What the module does, in plain English, is in `module/locale/description-en.md`.
 
+Presets can set `smarter-pathing.rebuildEveryTicks` (200) for the full path rebuild
+interval, `smarter-pathing.shortcutGroundSteps` (30) for the minimum walking distance,
+and `smarter-pathing.shortcutSavingPercent` (25) for the minimum saving from climbing.
+
 ## What is in here
 
 | Folder | |

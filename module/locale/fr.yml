@@ -4,10 +4,6 @@ assassins_resume_tooltip: |-
 assassins_shortcut: Les assassins n'escaladent que si c'est nettement plus court
 assassins_shortcut_tooltip: |-
   Les assassins cherchent d'abord un chemin au sol et empruntent toujours un trajet court. Si le trajet est long, ils évaluent aussi le passage par les murs et n'escaladent que si c'est nettement plus court. Fini les escalades inutiles quand un détour suffit.
-shortcut_ground_steps: Les trajets plus courts ne sont jamais remplacés par l'escalade (cases)
-shortcut_ground_steps_tooltip: Si le chemin au sol compte moins de cases que ce seuil, les assassins y vont simplement à pied.
-shortcut_saving_percent: L'escalade doit raccourcir le trajet d'au moins (pour cent)
-shortcut_saving_percent_tooltip: Avec 25, les assassins n'escaladent que si le passage par les murs est au moins un quart plus court qu'à pied. Avec 0, ils prennent toujours le plus court.
 workers_unstuck: Les ouvriers en pause ne restent plus bloqués
 workers_unstuck_tooltip: |-
   Les ouvriers en pause se rendent vers un jardin, un mât de mai ou un autre bâtiment agréable. Si leur chemin était bloqué, ils restaient figés indéfiniment sans jamais retourner travailler. Désormais, ils choisissent un autre lieu ou reprennent le travail à la fin de leur pause.
@@ -19,10 +15,8 @@ ignore_quarry_piles_tooltip: Les troupes en posture agressive ne partent plus d'
 rebuild_limit: Les trajets impossibles ne recalculent pas toute la carte
 rebuild_limit_tooltip: |-
   Lorsqu'un trajet ne peut pas être tracé (zones à sens unique), le jeu reconstruit tous les chemins de la carte avant d'abandonner — et l'unité réessaie quelques instants plus tard, si bien qu'une poignée d'unités bloquées fait ramer le jeu. Désormais, ce recalcul n'a lieu qu'à l'intervalle choisi ; entre-temps, le trajet échoue simplement sans coût.
-rebuild_every_ticks: Recalculer les chemins de la carte au plus tous les (ticks de jeu)
-rebuild_every_ticks_tooltip: 200 ticks représentent quelques secondes à vitesse normale.
 balance_changes: Modifications de l'équilibrage
-bugfixes: Corrections
+bugfixes: Corrections de bugs
 qol: Qualité de vie
 tags.behavior: Comportement
 tags.bugfixes: Corrections

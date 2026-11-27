@@ -4,10 +4,6 @@ assassins_resume_tooltip: |-
 assassins_shortcut: Az orgyilkosok csak egyértelmű rövidítésnél másznak
 assassins_shortcut_tooltip: |-
   Az orgyilkosok először a földön keresnek utat; a rövid utat mindig gyalog teszik meg. Hosszabb útnál megvizsgálják a falakon át vezető utat is, és csak akkor másznak, ha az egyértelműen rövidebb. Nincs több felesleges falmászás, ha kerülni is egyszerű.
-shortcut_ground_steps: Ennél rövidebb gyalogutat sosem vált ki mászás (mező)
-shortcut_ground_steps_tooltip: Ha a földi út ennél kevesebb mező hosszú, az orgyilkosok egyszerűen végigsétálják.
-shortcut_saving_percent: A mászásnak legalább ennyit kell megtakarítania (százalék)
-shortcut_saving_percent_tooltip: 25 esetén az orgyilkosok csak akkor másznak, ha a falakon át vezető út legalább negyedével rövidebb a gyalogútnál. 0 esetén mindig a rövidebbet választják.
 workers_unstuck: A pihenő munkások nem akadnak el
 workers_unstuck_tooltip: |-
   A pihenő munkások kerthez, májusfához vagy más szép épülethez sétálnak. Ha az útjuk elzáródott, korábban örökre ott toporogtak, és sosem tértek vissza dolgozni. Most másik helyet választanak, vagy a szünet végén visszamennek dolgozni.
@@ -19,9 +15,7 @@ ignore_quarry_piles_tooltip: A támadó harci módú csapatok már nem indulnak 
 rebuild_limit: A sikertelen útvonalak nem építik újra az egész térképet
 rebuild_limit_tooltip: |-
   Ha egy egység útvonala nem tervezhető meg (egyirányú zsákutca), a játék feladás előtt újraépíti a teljes térkép minden útvonalát — majd az egység pillanatok múlva újra próbálja, így pár elakadt egység is lelassíthatja a játékot. Mostantól az újraépítés legfeljebb a megadott időközönként történik; közben az útvonal terhelés nélkül sikertelen lesz.
-rebuild_every_ticks: Térképútvonalak újraépítése legfeljebb ennyi játékütemenként
-rebuild_every_ticks_tooltip: 200 játékütem normál sebességen néhány másodperc.
-balance_changes: Egyensúly-módosítások
+balance_changes: Egyensúlymódosítások
 bugfixes: Hibajavítások
 qol: Kényelmi funkciók
 tags.behavior: Viselkedés

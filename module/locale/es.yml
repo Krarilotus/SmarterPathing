@@ -4,10 +4,6 @@ assassins_resume_tooltip: |-
 assassins_shortcut: Los asesinos solo trepan si es claramente más corto
 assassins_shortcut_tooltip: |-
   Los asesinos buscan primero un camino por tierra y siempre recorren a pie un trayecto corto. Si el recorrido es largo, comprueban también el camino por los muros y solo trepan si ahorra claramente camino. Se acabó subir y bajar muros cuando basta rodear.
-shortcut_ground_steps: Los recorridos más cortos nunca se sustituyen por trepar (casillas)
-shortcut_ground_steps_tooltip: Si el camino por tierra tiene menos casillas que este valor, los asesinos simplemente caminan.
-shortcut_saving_percent: Trepar debe ahorrar al menos este porcentaje del recorrido
-shortcut_saving_percent_tooltip: Con 25, los asesinos solo trepan si el camino por los muros es al menos un cuarto más corto que ir a pie. Con 0, toman el camino que sea más corto.
 workers_unstuck: Los trabajadores en descanso no se atascan
 workers_unstuck_tooltip: |-
   Los trabajadores en descanso caminan hacia un jardín, un palo de mayo u otro edificio agradable. Si su camino quedaba bloqueado, antes se quedaban intentándolo para siempre sin volver al trabajo. Ahora eligen otro lugar o vuelven a trabajar al terminar su descanso.
@@ -19,10 +15,8 @@ ignore_quarry_piles_tooltip: Las tropas en postura agresiva ya no se desvían po
 rebuild_limit: Las rutas fallidas no reconstruyen todo el mapa
 rebuild_limit_tooltip: |-
   Cuando no puede trazarse la ruta de una unidad (un punto con caminos de un solo sentido), el juego reconstruye todas las rutas del mapa antes de rendirse, y la unidad vuelve a intentarlo al poco tiempo, de modo que unas pocas unidades atascadas ralentizan toda la partida. Ahora esa reconstrucción ocurre como mucho cada cierto tiempo; entre tanto la ruta simplemente falla sin coste.
-rebuild_every_ticks: Reconstruir las rutas del mapa como mucho cada (ticks de juego)
-rebuild_every_ticks_tooltip: 200 ticks son unos pocos segundos a velocidad normal.
 balance_changes: Cambios de equilibrio
-bugfixes: Correcciones
-qol: Calidad de vida
+bugfixes: Correcciones de errores
+qol: Comodidad de juego
 tags.behavior: Comportamiento
 tags.bugfixes: Correcciones

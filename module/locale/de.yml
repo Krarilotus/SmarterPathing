@@ -4,10 +4,6 @@ assassins_resume_tooltip: |-
 assassins_shortcut: Assassinen klettern nur bei deutlicher Abkürzung
 assassins_shortcut_tooltip: |-
   Assassinen suchen zuerst nach einem Weg am Boden. Kurze Wege werden immer gelaufen. Bei einem langen Fußweg prüfen sie zusätzlich den Weg über Mauern und klettern nur, wenn dieser deutlich kürzer ist. Kein unnötiges Auf- und Abklettern mehr, wenn ein Umweg zu Fuß genügt.
-shortcut_ground_steps: Kürzere Fußwege werden nie durch Klettern ersetzt (Felder)
-shortcut_ground_steps_tooltip: Ist der Weg am Boden kürzer als so viele Felder, laufen Assassinen einfach zu Fuß.
-shortcut_saving_percent: Klettern muss mindestens so viel Weg einsparen (Prozent)
-shortcut_saving_percent_tooltip: Bei 25 klettern Assassinen nur, wenn der Weg über Mauern mindestens ein Viertel kürzer ist als der Fußweg. Bei 0 nehmen sie stets den kürzeren Weg.
 workers_unstuck: Arbeiter in der Pause bleiben nicht mehr stecken
 workers_unstuck_tooltip: |-
   Arbeiter in der Pause laufen zu einem Garten, Maibaum oder einem anderen schönen Gebäude. Wurde ihr Weg dorthin blockiert, blieben sie früher endlos stehen und kehrten nie zur Arbeit zurück. Nun suchen sie ein anderes Ziel oder gehen nach Pausenende zurück an die Arbeit.
@@ -19,10 +15,8 @@ ignore_quarry_piles_tooltip: Truppen in aggressiver Haltung greifen nicht mehr v
 rebuild_limit: Fehlgeschlagene Routen bauen nicht die ganze Karte neu auf
 rebuild_limit_tooltip: |-
   Kann die Route einer Einheit nicht berechnet werden (an einer Stelle mit Einbahnwegen), baut das Spiel alle Pfade der gesamten Karte neu auf, bevor es aufgibt – und kurz darauf versucht es die Einheit erneut, sodass eine Handvoll blockierter Einheiten das Spiel zum Ruckeln bringt. Nun geschieht dieser Neuaufbau höchstens im eingestellten Abstand; dazwischen schlägt die Route einfach kostenfrei fehl.
-rebuild_every_ticks: Kartenpfade höchstens alle so viele Spielticks neu aufbauen
-rebuild_every_ticks_tooltip: 200 Ticks entsprechen bei normaler Geschwindigkeit einigen Sekunden.
 balance_changes: Balance-Änderungen
 bugfixes: Fehlerkorrekturen
-qol: Komfortfunktionen
+qol: Komfort
 tags.behavior: Verhalten
 tags.bugfixes: Fehlerkorrekturen

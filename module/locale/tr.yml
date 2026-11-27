@@ -4,10 +4,6 @@ assassins_resume_tooltip: |-
 assassins_shortcut: Suikastçılar yalnızca belirgin kestirme varsa tırmanır
 assassins_shortcut_tooltip: |-
   Suikastçılar önce yerden bir yol arar; kısa bir yürüyüş her zaman tercih edilir. Yürüyüş uzunsa surların üzerinden geçen yolu da kontrol eder ve yalnızca belirgin şekilde daha kısaysa tırmanırlar. Etraftan dolanmak yeterliyken gereksiz sur tırmanışı biter.
-shortcut_ground_steps: Bundan kısa yürüyüşler asla tırmanmayla değiştirilmez (kare)
-shortcut_ground_steps_tooltip: Yerden yol bu sayıdan daha az kare ise suikastçılar yürüyerek gider.
-shortcut_saving_percent: Tırmanma yürüyüşten en az bu kadar tasarruf etmeli (yüzde)
-shortcut_saving_percent_tooltip: 25 ile suikastçılar yalnızca sur üzerinden yol yürümekten en az dörtte bir daha kısaysa tırmanır. 0 ile hangisi kısaysa onu seçerler.
 workers_unstuck: Moladaki işçiler takılıp kalmaz
 workers_unstuck_tooltip: |-
   Moladaki işçiler bir bahçeye, direğe veya başka bir hoş binaya yürür. Oraya giden yol kapanırsa eskiden sonsuza dek bekleyip işe dönmezlerdi. Artık başka bir yer seçer ya da mola bitince işlerine dönerler.
@@ -19,10 +15,8 @@ ignore_quarry_piles_tooltip: Saldırgan duruştaki birlikler artık ana depoyu g
 rebuild_limit: Başarısız rotalar tüm haritayı yeniden hesaplatmaz
 rebuild_limit_tooltip: |-
   Bir birimin rotası çizilemediğinde (yolların tek yönlü olduğu bir noktada), oyun vazgeçmeden önce tüm haritanın yollarını yeniden kurar — birim birkaç an sonra tekrar denediği için birkaç takılı birim bile oyunu süründürür. Artık bu yeniden kurma en fazla belirli aralıklarla yapılır; arada rota yük bindirmeden başarısız olur.
-rebuild_every_ticks: Harita yollarını en fazla şu aralıkla yeniden kur (oyun tıkı)
-rebuild_every_ticks_tooltip: Normal hızda 200 tık birkaç saniyedir.
 balance_changes: Denge değişiklikleri
 bugfixes: Hata düzeltmeleri
-qol: Yaşam kalitesi
+qol: Kullanım kolaylığı
 tags.behavior: Davranış
 tags.bugfixes: Hata düzeltmeleri

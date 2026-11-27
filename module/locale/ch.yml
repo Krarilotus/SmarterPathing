@@ -4,10 +4,6 @@ assassins_resume_tooltip: |-
 assassins_shortcut: 刺客仅在明显更近时才攀墙
 assassins_shortcut_tooltip: |-
   刺客会先在地面寻路，短距离始终步行；只有路程较长时才会同时评估翻墙路线，且仅当翻墙明显更短时才攀爬，不再动辄上下城墙。
-shortcut_ground_steps: 短于此距离的地面路线绝不改为攀墙（格）
-shortcut_ground_steps_tooltip: 如果地面路线短于这么多格，刺客会直接步行。
-shortcut_saving_percent: 攀墙至少需要节省的步行比例（百分比）
-shortcut_saving_percent_tooltip: 设为 25 时，只有翻墙路线比步行至少短四分之一，刺客才会攀墙；设为 0 则始终选择更短的路线。
 workers_unstuck: 休息中的工人不再卡住
 workers_unstuck_tooltip: |-
   休息中的工人会走向花园、五朔节花柱或其他正面建筑。若道路受阻，过去他们会一直原地尝试而永不复工；现在他们会改选其他去处，或在休息结束后回到岗位。
@@ -19,10 +15,8 @@ ignore_quarry_piles_tooltip: 处于进攻姿态的部队不再主动跑去攻击
 rebuild_limit: 寻路失败不再重建整张地图路径
 rebuild_limit_tooltip: |-
   当某个单位无法规划出路径（处于单向死角）时，游戏会在放弃前重建整张地图的所有路径，而该单位片刻后又会重试，导致少数卡住的单位就让游戏卡成幻灯片。现在该重建最多按设定间隔执行一次；间隔期间路径直接零开销失败。
-rebuild_every_ticks: 重建地图路径的最短间隔（游戏刻）
-rebuild_every_ticks_tooltip: 正常速度下 200 刻大约为几秒。
-balance_changes: 平衡性改动
+balance_changes: 平衡调整
 bugfixes: 错误修复
-qol: 体验优化
+qol: 便利性改进
 tags.behavior: 行为
 tags.bugfixes: 错误修复
