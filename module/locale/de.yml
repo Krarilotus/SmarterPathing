@@ -1,20 +1,15 @@
-assassins_resume: Assassinen setzen Befehl nach einem Kampf fort
-assassins_resume_tooltip: |-
-  Wenn ausgesandte Assassinen auf Feinde treffen und kämpfen, ziehen sie nach dem Kampf weiter zu ihrem ursprünglichen Ziel und erklimmen unterwegs weiterhin Mauern wie zuvor. Ohne diese Option blieben sie oft einfach dort stehen, wo der Kampf endete.
-assassins_shortcut: Assassinen klettern nur bei deutlicher Abkürzung
-assassins_shortcut_tooltip: |-
-  Assassinen suchen zuerst nach einem Weg am Boden. Kurze Wege werden immer gelaufen. Bei einem langen Fußweg prüfen sie zusätzlich den Weg über Mauern und klettern nur, wenn dieser deutlich kürzer ist. Kein unnötiges Auf- und Abklettern mehr, wenn ein Umweg zu Fuß genügt.
-workers_unstuck: Arbeiter in der Pause bleiben nicht mehr stecken
-workers_unstuck_tooltip: |-
-  Arbeiter in der Pause laufen zu einem Garten, Maibaum oder einem anderen schönen Gebäude. Wurde ihr Weg dorthin blockiert, blieben sie früher endlos stehen und kehrten nie zur Arbeit zurück. Nun suchen sie ein anderes Ziel oder gehen nach Pausenende zurück an die Arbeit.
-workers_jobs_unstuck: Auf dem Arbeitsweg steckengebliebene Arbeiter werden ersetzt
-workers_jobs_unstuck_tooltip: |-
-  Ein Arbeiter, dessen Weg zur Arbeit, zum Vorratslager oder zum Kornspeicher dauerhaft blockiert war, blieb früher endlos stehen. Nun gibt er nach etwa fünf Sekunden fehlgeschlagener Versuche auf die spielübliche Weise auf, und ein neuer Arbeiter rückt vom Lagerfeuer nach. Getragene Güter gehen dabei wie im Originalspiel verloren.
-ignore_quarry_piles: Aggressive Truppen lassen Steinbruch-Lager in Ruhe
-ignore_quarry_piles_tooltip: Truppen in aggressiver Haltung greifen nicht mehr von selbst feindliche Steinbruch-Lager (den Steinhaufen neben einem Steinbruch) an, genau wie sie bereits das Haupt-Vorratslager ignorieren. Manuell kannst du sie weiterhin darauf ansetzen.
-rebuild_limit: Fehlgeschlagene Routen bauen nicht die ganze Karte neu auf
-rebuild_limit_tooltip: |-
-  Kann die Route einer Einheit nicht berechnet werden (an einer Stelle mit Einbahnwegen), baut das Spiel alle Pfade der gesamten Karte neu auf, bevor es aufgibt – und kurz darauf versucht es die Einheit erneut, sodass eine Handvoll blockierter Einheiten das Spiel zum Ruckeln bringt. Nun geschieht dieser Neuaufbau höchstens im eingestellten Abstand; dazwischen schlägt die Route einfach kostenfrei fehl.
+assassins_resume: Assassinen setzen Befehle nach einem Kampf fort
+assassins_resume_tooltip: Assassinen kehren nach Ende eines Kampfes zu ihren vorherigen Befehlen zurück.
+assassins_shortcut: Assassinen klettern nur für eine kürzere Route
+assassins_shortcut_tooltip: Gib einen normalen Bewegungsbefehl; Assassinen klettern nur, wenn es genug Weg spart.
+workers_unstuck: In Pausen feststeckende Arbeiter befreien
+workers_unstuck_tooltip: Arbeiter, die in einer Pause feststecken, können wieder an die Arbeit gehen.
+workers_jobs_unstuck: Auf dem Arbeitsweg feststeckende Arbeiter ersetzen
+workers_jobs_unstuck_tooltip: Das Gebäude erhält einen neuen Arbeiter, wenn der zugewiesene es nicht erreichen kann.
+ignore_quarry_piles: Aggressive Truppen ignorieren Steinbruch-Lager
+ignore_quarry_piles_tooltip: Einheiten in aggressiver Haltung lassen Steinbruch-Stapel in Ruhe.
+rebuild_limit: Vollständige Pfad-Neuberechnung nach Fehlroute begrenzen
+rebuild_limit_tooltip: Fehlgeschlagene Routen können erst nach kurzer Verzögerung eine volle Neuberechnung auslösen.
 balance_changes: Balance-Änderungen
 bugfixes: Fehlerkorrekturen
 qol: Komfort

@@ -1,20 +1,15 @@
-assassins_resume: Az orgyilkosok harc után folytatják az útjukat
-assassins_resume_tooltip: |-
-  Ha az útnak indított orgyilkosok ellenségbe ütköznek és megküzdenek vele, a harc végén továbbmennek az eredeti céljuk felé, útközben a falakat ugyanúgy megmászva. Enélkül gyakran ott ragadtak, ahol a harc véget ért.
-assassins_shortcut: Az orgyilkosok csak egyértelmű rövidítésnél másznak
-assassins_shortcut_tooltip: |-
-  Az orgyilkosok először a földön keresnek utat; a rövid utat mindig gyalog teszik meg. Hosszabb útnál megvizsgálják a falakon át vezető utat is, és csak akkor másznak, ha az egyértelműen rövidebb. Nincs több felesleges falmászás, ha kerülni is egyszerű.
-workers_unstuck: A pihenő munkások nem akadnak el
-workers_unstuck_tooltip: |-
-  A pihenő munkások kerthez, májusfához vagy más szép épülethez sétálnak. Ha az útjuk elzáródott, korábban örökre ott toporogtak, és sosem tértek vissza dolgozni. Most másik helyet választanak, vagy a szünet végén visszamennek dolgozni.
-workers_jobs_unstuck: A munkába menet elakadt munkások lecserélődnek
-workers_jobs_unstuck_tooltip: |-
-  Az a munkás, akinek elzáródott az útja a munkahelyére, raktárba vagy magtárba, korábban örökre ott ragadt. Most körülbelül öt másodperc sikertelen próbálkozás után a játék megszokott módján távozik, és új munkás érkezik a tábortűztől. A nála lévő áru elvész, akárcsak az alapjátékban.
-ignore_quarry_piles: A támadó csapatok békén hagyják a kőfejtő rakásait
-ignore_quarry_piles_tooltip: A támadó harci módú csapatok már nem indulnak el maguktól megtámadni az ellenség kőfejtő melletti kőrakását, ahogy a fő raktárat is figyelmen kívül hagyják. Kézzel továbbra is rájuk küldheted őket.
-rebuild_limit: A sikertelen útvonalak nem építik újra az egész térképet
-rebuild_limit_tooltip: |-
-  Ha egy egység útvonala nem tervezhető meg (egyirányú zsákutca), a játék feladás előtt újraépíti a teljes térkép minden útvonalát — majd az egység pillanatok múlva újra próbálja, így pár elakadt egység is lelassíthatja a játékot. Mostantól az újraépítés legfeljebb a megadott időközönként történik; közben az útvonal terhelés nélkül sikertelen lesz.
+assassins_resume: Az orgyilkosok harc után folytatják a parancsaikat
+assassins_resume_tooltip: Az orgyilkosok a harc végeztével visszatérnek korábbi parancsaikhoz.
+assassins_shortcut: Az orgyilkosok csak rövidebb útért másznak
+assassins_shortcut_tooltip: Adj ki normál mozgásparancsot, és az orgyilkosok csak akkor másznak, ha elég utat spórolnak.
+workers_unstuck: Pihenőn elakadt munkások kiszabadítása
+workers_unstuck_tooltip: A pihenő közben elakadt munkások visszatérhetnek a munkához.
+workers_jobs_unstuck: Munkába menet elakadt munkások leváltása
+workers_jobs_unstuck_tooltip: Az épület új munkást kap, ha a kijelölt munkás nem tudja elérni.
+ignore_quarry_piles: A támadó csapatok figyelmen kívül hagyják a kőfejtő-halmokat
+ignore_quarry_piles_tooltip: A támadó harci módban lévő egységek békén hagyják a kőfejtő-rakásokat.
+rebuild_limit: Teljes útvonal-újraépítés korlátozása sikertelen út után
+rebuild_limit_tooltip: A sikertelen útvonalak csak rövid késleltetés után indíthatnak teljes újraépítést.
 balance_changes: Egyensúlymódosítások
 bugfixes: Hibajavítások
 qol: Kényelmi funkciók
