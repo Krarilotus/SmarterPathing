@@ -3,11 +3,11 @@ assassins_resume_tooltip: Assassinen kehren nach Ende eines Kampfes zu ihren vor
 assassins_shortcut: Assassinen klettern nur für eine kürzere Route
 assassins_shortcut_tooltip: Gib einen normalen Bewegungsbefehl; Assassinen klettern nur, wenn es genug Weg spart.
 workers_unstuck: In Pausen feststeckende Arbeiter befreien
-workers_unstuck_tooltip: Arbeiter, die in einer Pause feststecken, können wieder an die Arbeit gehen.
+workers_unstuck_tooltip: Feststeckende Arbeiter können nach der Pause weiterarbeiten.
 workers_jobs_unstuck: Auf dem Arbeitsweg feststeckende Arbeiter ersetzen
 workers_jobs_unstuck_tooltip: Das Gebäude erhält einen neuen Arbeiter, wenn der zugewiesene es nicht erreichen kann.
-ignore_quarry_piles: Aggressive Truppen ignorieren Steinbruch-Lager
-ignore_quarry_piles_tooltip: Einheiten in aggressiver Haltung lassen Steinbruch-Stapel in Ruhe.
+ignore_quarry_piles: Aggressive Truppen lassen Steinbruchvorräte in Ruhe
+ignore_quarry_piles_tooltip: Einheiten in aggressiver Haltung greifen Steinbruchvorräte nicht an.
 rebuild_limit: Vollständige Pfad-Neuberechnung nach Fehlroute begrenzen
 rebuild_limit_tooltip: Fehlgeschlagene Routen können erst nach kurzer Verzögerung eine volle Neuberechnung auslösen.
 balance_changes: Balance-Änderungen
