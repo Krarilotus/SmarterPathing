@@ -166,8 +166,8 @@ local SAVE_CLIMBERS = "assassin-climbers-v1.bin"
 ---------------------------------------------------------------------------------------
 
 local function scan(pattern, purpose)
-  local address, reason = core.AOBScanUnique(pattern)
-  if not address then error(purpose .. " " .. reason, 0) end
+  local found, address = pcall(core.AOBScan, pattern)
+  if not found then error(purpose .. " not found", 0) end
   return address
 end
 
