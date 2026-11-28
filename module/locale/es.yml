@@ -15,3 +15,7 @@ bugfixes: Correcciones de errores
 qol: Comodidad de juego
 tags.behavior: Comportamiento
 tags.bugfixes: Correcciones
+cat_unit_controls: Control de unidades
+cat_unit_orders: Órdenes y objetivos de unidades
+cat_units_armour: Movimiento y armadura de unidades
+cat_worker_routes: Rutas y entregas de trabajadores

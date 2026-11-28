@@ -15,3 +15,7 @@ bugfixes: Исправления ошибок
 qol: Удобство игры
 tags.behavior: Поведение
 tags.bugfixes: Исправления
+cat_unit_controls: Управление войсками
+cat_unit_orders: Приказы и цели войск
+cat_units_armour: Передвижение и броня войск
+cat_worker_routes: Маршруты и доставки работников

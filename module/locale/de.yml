@@ -15,3 +15,7 @@ bugfixes: Fehlerkorrekturen
 qol: Komfort
 tags.behavior: Verhalten
 tags.bugfixes: Fehlerkorrekturen
+cat_unit_controls: Truppensteuerung
+cat_unit_orders: Truppenbefehle und Zielwahl
+cat_units_armour: Truppenbewegung und Rüstung
+cat_worker_routes: Arbeiterwege und Lieferungen

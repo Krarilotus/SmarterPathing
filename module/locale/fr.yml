@@ -15,3 +15,7 @@ bugfixes: Corrections de bugs
 qol: Qualité de vie
 tags.behavior: Comportement
 tags.bugfixes: Corrections
+cat_unit_controls: Contrôle des unités
+cat_unit_orders: Ordres et ciblage des unités
+cat_units_armour: Déplacement et armure des unités
+cat_worker_routes: Trajets et livraisons des ouvriers

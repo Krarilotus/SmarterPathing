@@ -15,3 +15,7 @@ bugfixes: 错误修复
 qol: 便利性改进
 tags.behavior: 行为
 tags.bugfixes: 错误修复
+cat_unit_controls: 部队操控
+cat_unit_orders: 部队指令与目标
+cat_units_armour: 部队移动与护甲
+cat_worker_routes: 工人路线与运送

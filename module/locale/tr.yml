@@ -15,3 +15,7 @@ bugfixes: Hata düzeltmeleri
 qol: Kullanım kolaylığı
 tags.behavior: Davranış
 tags.bugfixes: Hata düzeltmeleri
+cat_unit_controls: Birlik kontrolleri
+cat_unit_orders: Birlik emirleri ve hedefleme
+cat_units_armour: Birlik hareketi ve zırh
+cat_worker_routes: İşçi yolları ve teslimatlar

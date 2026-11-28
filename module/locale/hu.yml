@@ -15,3 +15,7 @@ bugfixes: Hibajavítások
 qol: Kényelmi funkciók
 tags.behavior: Viselkedés
 tags.bugfixes: Hibajavítások
+cat_unit_controls: Egységirányítás
+cat_unit_orders: Egységparancsok és célpontok
+cat_units_armour: Egységmozgás és páncél
+cat_worker_routes: Munkásútvonalak és szállítások

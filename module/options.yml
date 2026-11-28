@@ -9,6 +9,7 @@ options:
   text: '{{assassins_resume_tooltip}}'
   category:
   - '{{bugfixes}}'
+  - '{{cat_unit_orders}}'
 - url: smarter-pathing.workersUnstuck
   name: smarter-pathing-workers-unstuck
   display: UCP2Switch
@@ -19,6 +20,7 @@ options:
   text: '{{workers_unstuck_tooltip}}'
   category:
   - '{{bugfixes}}'
+  - '{{cat_worker_routes}}'
 - url: smarter-pathing.workersJobsUnstuck
   name: smarter-pathing-workers-jobs-unstuck
   display: UCP2Switch
@@ -29,6 +31,7 @@ options:
   text: '{{workers_jobs_unstuck_tooltip}}'
   category:
   - '{{bugfixes}}'
+  - '{{cat_worker_routes}}'
 - url: smarter-pathing.rebuildLimit
   name: smarter-pathing-rebuild-limit
   display: UCP2Switch
@@ -39,6 +42,7 @@ options:
   text: '{{rebuild_limit_tooltip}}'
   category:
   - '{{bugfixes}}'
+  - '{{cat_worker_routes}}'
 - url: smarter-pathing.ignoreQuarryPiles
   name: smarter-pathing-ignore-quarry-piles
   display: UCP2Switch
@@ -49,6 +53,7 @@ options:
   text: '{{ignore_quarry_piles_tooltip}}'
   category:
   - '{{qol}}'
+  - '{{cat_unit_controls}}'
 - url: smarter-pathing.assassinsShortcut
   name: smarter-pathing-assassins-shortcut
   display: UCP2Switch
@@ -59,6 +64,7 @@ options:
   text: '{{assassins_shortcut_tooltip}}'
   category:
   - '{{balance_changes}}'
+  - '{{cat_units_armour}}'
 - url: smarter-pathing.rebuildEveryTicks
   name: smarter-pathing-rebuild-every-ticks
   display: Number

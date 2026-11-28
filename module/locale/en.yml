@@ -15,3 +15,7 @@ bugfixes: Bugfixes
 qol: Quality of Life
 tags.behavior: Behavior
 tags.bugfixes: Bug fixes
+cat_unit_controls: Unit controls
+cat_unit_orders: Unit orders and targeting
+cat_units_armour: Unit movement and armour
+cat_worker_routes: Worker routes and deliveries
